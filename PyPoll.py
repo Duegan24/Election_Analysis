@@ -8,8 +8,6 @@ file_to_save = os.path.join("Analysis","election_results.txt")
 # Setup variables
 Total_Votes = 0
 
-
-
 ## Declare the empty lists
 Candidate_options = []
 County_options = []
@@ -28,9 +26,7 @@ with open(file_to_load) as election_data:
         
     # setup for loop to go through data in csv file
     for row in file_reader:
-        
-        
-
+ 
         # Count each vote in the CSV file
         Total_Votes += 1
         
@@ -43,16 +39,14 @@ with open(file_to_load) as election_data:
 
             #start candidate vote counter to zero to start off to begin tracking the candidate's vote count
             Candidate_votes[candidate_name] = 0
-            
         
         # Add a vote to that candidate's count
         Candidate_votes[candidate_name] +=1
 
-
 #Winning Candidate and Winning Count Tracker Initialization
 winning_candidate = ""
 winning_count = 0
-winning_percentage = float(0)
+winning_percentage = 0
 
 # Open the election results file to place the outputs from the analysis
 with open(file_to_save, "w") as election_results_output:
@@ -69,8 +63,6 @@ with open(file_to_save, "w") as election_results_output:
     
     # Save to the output file
     election_results_output.write(election_results)
-    
-
 
     for candidate in Candidate_votes:
         
@@ -101,9 +93,6 @@ with open(file_to_save, "w") as election_results_output:
             winning_percentage = vote_percentage
 
 
-
-
-
     # Print winning results to terminal
     winning_candidate_summary = (
         f"-------------------------\n"
@@ -116,19 +105,3 @@ with open(file_to_save, "w") as election_results_output:
     # Save winning results to output file
     election_results_output.write(winning_candidate_summary)
     
-
-
-#     # Output:
-#     # Total number of votes cast
-#     # A complete list of candidates who received votes
-#     # Total number of votes each candidate received
-#     # Percentage of votes each candidate won
-#     # The winner of the election based on popular vote
-
-
-
-
-
-# # Close the output file
-# outputfile.close
-
