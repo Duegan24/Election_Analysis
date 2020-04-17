@@ -60,6 +60,10 @@ winning_candidate = ""
 winning_count = 0
 winning_percentage = 0
 
+#largest County tracker Initialization
+largest_county = ""
+largest_county_count = 0
+
 # Open the election results file to place the outputs from the analysis
 with open(file_to_save, "w") as election_results_output:
 
@@ -68,13 +72,46 @@ with open(file_to_save, "w") as election_results_output:
         f"\nElection Results\n"
         f"-------------------------\n"
         f"Total Votes: {Total_Votes:,}\n"
-        f"-------------------------\n")
+        f"-------------------------\n\n\n"
+        f"County Votes:\n")
     
     #Print to terminal
     print(election_results, end="")
     
     # Save to the output file
     election_results_output.write(election_results)
+
+    for county in County_votes:
+
+        votes = County_votes[county]
+
+        vote_percentage = float(votes / Total_Votes * 100)
+
+        county_results = (f'{county}: {vote_percentage:.1f}% ({votes:,})\n')
+
+        # Votes to terminal
+        print(county_results)
+
+        # Results saved to output file
+        election_results_output.write(county_results)
+
+        # Determine the winning vote count and candidate
+        # Determine if the vote is great than the winning count.
+        if (votes > largest_county_count):
+            
+            largest_county_count = votes
+            largest_county = county
+    
+
+    # Print winning results to terminal
+    largest_county_summary = (
+        f"\n\n-------------------------\n"
+        f"Largest County Turnout: {largest_county}\n"
+        f"-------------------------\n")
+    print(largest_county_summary)
+
+    # Save winning results to output file
+    election_results_output.write(largest_county_summary)
 
     for candidate in Candidate_votes:
         
