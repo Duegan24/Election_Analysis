@@ -14,6 +14,7 @@ County_options = []
 
 ## Declare the empty dictionary
 Candidate_votes = {}
+County_votes = {}
 
 # Open the election data file
 with open(file_to_load) as election_data:
@@ -30,18 +31,29 @@ with open(file_to_load) as election_data:
         # Count each vote in the CSV file
         Total_Votes += 1
         
-        # Extract the candidate name from the csv file
+        # Extract the candidate and county name from the csv file
         candidate_name = row[2]
+        county_name = row[1]
         
         # Add only names to the options list that are not already in the list
         if candidate_name not in Candidate_options:
             Candidate_options.append(candidate_name)
 
-            #start candidate vote counter to zero to start off to begin tracking the candidate's vote count
+            #start candidate vote counter to zero to begin tracking the candidate's vote count
             Candidate_votes[candidate_name] = 0
         
         # Add a vote to that candidate's count
         Candidate_votes[candidate_name] +=1
+
+        # Add only county names to the options list that are not in the list
+        if county_name not in County_options:
+            County_options.append(county_name)
+
+            # Start County vote counter to zero to begin tracking the candidate's vote count
+            County_votes[county_name] = 0
+        
+        # Add a vote to the appropriate county
+        County_votes[county_name] +=1
 
 #Winning Candidate and Winning Count Tracker Initialization
 winning_candidate = ""
